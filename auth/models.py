@@ -6,16 +6,17 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from datetime import datetime
 
-from app import db, create_app
+from app import db
 from authlib.jose import jwt
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     _password = db.Column("password", db.String, nullable=False)
+    fullname = db.Column(db.String, nullable=True)
     _token = db.Column("token", db.String, nullable=True)
-    create_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-    update_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    create_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    update_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
 
     @hybrid_property
